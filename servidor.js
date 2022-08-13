@@ -25,11 +25,20 @@ servidor.use(express.urlencoded({extended:false}));
 servidor.use(express.json());
 
 servidor.use(myConnection(mysql,datosBD,"single"));
-
+servidor.use(session({secret: "qwerty",
+                        resave: false,
+                        saveUninitialized: false
+                    }));
 
 servidor.use("/", require("./src/rutas/index.js"));
-servidor.use("/alumnos", require("./src/rutas/alumnos.js"));
-//servidor.use("/sesion", require("./src/rutas/sesion.js"));
+servidor.use("/ubicacion", require("./src/rutas/ubicacion.js"));
+servidor.use("/preventa", require("./src/rutas/preventa.js"));
+servidor.use("/contacto", require("./src/rutas/contacto.js"));
+servidor.use("/ayuda", require("./src/rutas/ayuda.js"));
+servidor.use("/boletos", require("./src/rutas/boletos.js"));
+
+servidor.use("/sesion", require("./src/rutas/sesion.js"));
+servidor.use("/iniciarSesion", require("./src/rutas/iniciarSesion.js"));
 
 servidor.use(express.static("./src/recursos"));
 
